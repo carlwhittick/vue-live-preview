@@ -3,16 +3,18 @@ import { ref } from 'vue'
 import ComponentEditor from './ComponentEditor.vue'
 import ComponentPreview from './ComponentPreview.vue'
 
-const code = ref(`<button>Click me</button>`)
+const props = defineProps(['code'])
+
+const liveCode = ref(props.code)
 
 function updatePreview(value: string) {
-    code.value = value
+    liveCode.value = value
     console.log('updatePreview', value)
 }
 </script>
 
 <template>
-    <component-editor :code="code" @change="updatePreview"></component-editor>
-    <component-preview :code="code"></component-preview>
-    {{ code }}
+    <component-editor :code="liveCode" @change="updatePreview"></component-editor>
+    <component-preview :code="liveCode"></component-preview>
+    {{ liveCode }}
 </template>

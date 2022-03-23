@@ -2,7 +2,7 @@
 import { ref, onBeforeMount } from 'vue'
 
 import { PrismEditor } from 'vue-prism-editor'
-import debounce from "debounce";
+// import debounce from "debounce";
 
 import 'vue-prism-editor/dist/prismeditor.min.css'; // import the styles somewhere
 
@@ -65,12 +65,6 @@ const updatePreview = (event: Event) => {
 //     emit("change", value);
 //   }, props.delay)
 // });
-</script>
-
-<script lang="ts">
-export default {
-  data: () => ({ code: 'console.log("Hello World")' }),
-};
 </script>
 
 <template>
