@@ -2,6 +2,8 @@
 import { propsToAttrMap } from '@vue/shared';
 import { onMounted, ref, watch } from 'vue'
 
+import { loadModule } from 'https://cdn.jsdelivr.net/npm/vue3-sfc-loader@0.8.4/dist/vue3-sfc-loader.esm.js'
+
 import VButton from './VButton.vue'
 
 const props = defineProps({
@@ -10,6 +12,7 @@ const props = defineProps({
 
 const iframeLoaded = (e: any) => {
   const iframe = e.target
+  
   const vueScript = iframe.contentWindow.document.createElement('script')
   vueScript.setAttribute('src', 'https://unpkg.com/vue@next')
 
@@ -44,10 +47,23 @@ const iframeLoaded = (e: any) => {
     watch(() => props.code, (newCode) => {
       app.$data.component = ''
 
-      app.$.components.LiveComponent = {
-        components: LiveComponent.components,
-        template: newCode,
+      const options = {
+        moduleCache: { vue: Vue },
+        getFile: () => newCode,
+        addStyle: () => {},
       }
+
+      const component = Vue.defineAsyncComponent(() => loadModule('file.vue', options))
+      component.name = 'LiveComponent'
+
+      console.log('COMPONENT', component)
+
+      app.$.components.LiveComponent = component
+
+      // app.$.components.LiveComponent = {
+      //   components: LiveComponent.components,
+      //   template: newCode,
+      // }
 
       app.$data.component = 'LiveComponent'
     })

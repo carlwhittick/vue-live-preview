@@ -11,7 +11,7 @@ createApp({
     return {
       code: `
         <script setup>
-          const message = 'HELLO I'M A MESSAGE'
+          const message = 'HELLO IM A MESSAGE'
         </script>
         <template>
           <input type="text" />

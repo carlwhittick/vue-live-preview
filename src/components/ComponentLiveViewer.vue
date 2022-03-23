@@ -14,7 +14,16 @@ function updatePreview(value: string) {
 </script>
 
 <template>
-    <component-editor :code="liveCode" @change="updatePreview"></component-editor>
-    <component-preview :code="liveCode"></component-preview>
-    {{ liveCode }}
+    <div class="component-live-preview">
+        <component-preview :code="liveCode"></component-preview>
+        <component-editor :code="liveCode" @change="updatePreview"></component-editor>
+    </div>
 </template>
+
+<style scoped>
+.component-live-preview {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+</style>
